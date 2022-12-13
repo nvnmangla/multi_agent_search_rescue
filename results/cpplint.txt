@@ -1,0 +1,11 @@
+Done processing ./include/base.hpp
+Done processing ./include/swat.hpp
+Done processing ./include/test.hpp
+Done processing ./include/threats.hpp
+Done processing ./src/base.cpp
+Done processing ./src/main.cpp
+Done processing ./src/swat.cpp
+Done processing ./src/threats.cpp
+Done processing ./test/main.cpp
+Done processing ./test/test.cpp
+Total errors found: 7
