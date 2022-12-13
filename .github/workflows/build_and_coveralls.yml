@@ -1,0 +1,95 @@
+##############################################################################
+#
+# GitGub CI workflow syntax spec:
+#    https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+#
+# CodeCov github action setup:
+#    https://github.com/codecov/codecov-action
+#
+# CodeCov badge setup:
+#    https://docs.codecov.com/docs/status-badges
+##############################################################################
+
+name: Build
+
+on:
+  # Triggered whenever push to the main branch
+  push:
+    branches: [ "main" ]
+
+  # Triggered whenever a pull request is created on main
+  pull_request:
+    branches: [ "main" ]
+    types: [opened]
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  build:
+    # Create a container of the latest Ubuntu, other values could be
+    # ubuntu-latest, ubuntu-22.04, etc.
+    runs-on: ubuntu-20.04
+    
+    steps:
+      # We want to use GitHub CI checkout version 3 to check out our branch
+      - uses: actions/checkout@v3
+      
+      # Install some system pacakges
+      - name: Install ROS 2 Galactic packages
+        run: |
+          sudo apt update
+          sudo apt install software-properties-common
+          sudo add-apt-repository universe
+          sudo apt update && sudo apt install curl
+          sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key \
+            -o /usr/share/keyrings/ros-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) \
+            signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] \
+            http://packages.ros.org/ros2/ubuntu \
+            $(. /etc/os-release && echo $UBUNTU_CODENAME) main" \
+            | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+          sudo apt update
+          sudo apt install ros-galactic-ros-base
+          sudo apt install python3-colcon-common-extensions
+          sudo apt install -y lcov
+          
+      # Build for test coverage
+      - name: Configure CMake flags and build exectables
+        run: |
+          source /opt/ros/galactic/setup.bash
+          colcon build --cmake-args -DCOVERAGE=1 --packages-select multi_agent_hostage_rescue
+          cat log/latest_build/multi_agent_hostage_rescue/stdout_stderr.log
+          find build/multi_agent_hostage_rescue/ | grep -E 'gcno' # catch error -- exepct to see .gcno files    
+     
+      # Check c++ code (and others) for style and static coding errors
+      - name: Check code sytle and error
+        run: |
+          source /opt/ros/galactic/setup.bash
+          colcon test-result --test-result-base build/multi_agent_hostage_rescue/ # catch error
+
+      # Run test suite and compute code coverage
+      - name: Run Test Coverage
+        run: |
+          source /opt/ros/galactic/setup.bash
+          source install/setup.bash
+          ros2 launch multi_agent_hostage_rescue run_test.launch.py
+          find build/multi_agent_hostage_rescue/ | grep -E 'gcda' # catch error -- expect to see .gcda files
+          
+      # Generate code coverage test report
+      - name: Generate test coverage report
+        run: |
+          source install/setup.bash
+          ros2 run multi_agent_hostage_rescue generate_coverage_report.bash
+
+      # Upload coverage result to CodeCov
+      - name: Upload coverage result to CodeCov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: ${{github.workspace}}/install/multi_agent_hostage_rescue/lib/multi_agent_hostage_rescue/coverage_cleaned.info
+          # flags: unittests # optional
+          # directory: ${{github.workspace}}/install/
+          # name: codecov-umbrella # optional
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)

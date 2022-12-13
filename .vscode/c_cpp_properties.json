@@ -1,0 +1,43 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/mahima/ws_moveit/devel/include/**",
+        "/home/mahima/catkin_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_planners/chomp/chomp_motion_planner/include/**",
+        "/home/mahima/ws_moveit/src/geometric_shapes/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_planners/chomp/chomp_interface/include/**",
+        "/home/mahima/ws_moveit/src/moveit_resources/prbt_ikfast_manipulator_plugin/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_ros/benchmarks/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_plugins/moveit_ros_control_interface/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_ros/move_group/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_ros/occupancy_map_monitor/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_ros/robot_interaction/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_ros/moveit_servo/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_setup_assistant/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_plugins/moveit_simple_controller_manager/include/**",
+        "/home/mahima/ws_moveit/src/moveit_visual_tools/include/**",
+        "/home/mahima/catkin_ws/src/multi_agent_search_rescue/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_planners/pilz_industrial_motion_planner/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_planners/pilz_industrial_motion_planner_testutils/include/**",
+        "/home/mahima/catkin_ws/src/competition_barrett_marora1/project3/include/**",
+        "/home/mahima/ws_moveit/src/rviz_visual_tools/include/**",
+        "/home/mahima/ws_moveit/src/moveit/moveit_planners/sbpl/core/sbpl_interface/include/**",
+        "/home/mahima/ws_moveit/src/srdfdom/include/**",
+        "/home/mahima/catkin_ws/src/turtlebot3/turtlebot3_slam/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
