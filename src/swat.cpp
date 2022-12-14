@@ -6,8 +6,11 @@ std::pair<float,float> make_pair(float a,float b){
 void Swat::move_to_goal(Robot &robot,std::unique_ptr<MoveBaseClient>&client){
     
     ROS_INFO_STREAM("Moving to goal" + this->robot_name);
+
+    
     client->sendGoal(this->get_goal(robot.goal_));
     this->moving = true;
+
 }
 
 
@@ -49,6 +52,21 @@ Swat::Swat(ros::NodeHandle nh,std::vector<Robot*>robots){
                 this->set_client(robot,clients[robot.name]);
                 this->moving = false;
                 this->move_to_goal(robot,clients[robot.name]);
+
+                while (nh.ok()){
+                     tf::StampedTransform transform;
+                     try{
+                       this->listner_.lookupTransform("map", robot.target_name+"_tf/odom",  
+                                                ros::Time(0), transform);
+                       
+                     }
+                     catch (tf::TransformException ex){
+                       ROS_ERROR("%s",ex.what());
+                       ros::Duration(1.0).sleep();
+                    }
+
+                }
+
             }
 
         }
