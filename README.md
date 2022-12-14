@@ -1,12 +1,10 @@
-# Final Project - Multi-Agent Hostage Rescue
+# Final Project - Multi-Agent Search Rescue
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
 ![CICD Workflow status](https://github.com/mahimaarora2208/multi_agent_search_rescue/actions/workflows/build_and_coveralls.yml/badge.svg)
-
 [![codecov](https://codecov.io/gh/mahimaarora2208/my-ros2-codecov-exp/branch/main/graph/badge.svg?token=AEULJJEMWV)](https://codecov.io/gh/mahimaarora2208/multi_agent_search_rescue)
 
 ## Overview
-This project simulates a Multi-agent system for search and rescue missions where we use turtlebot3 package in ROS2 Galactic. Our multi-agent system consists of 2- robots that are each specialized for a certain task. 8 turtlebots will be simulated as threats, another 8 turtlebots will be specific to neutralizing these threats and 4 people will be simulated using Aruco markers. The remaining 4 turtlebots will be used to rescue these 4 hostages.
+This project simulates a Multi-agent system for search and rescue missions where we use turtlebot3 package in ROS2 Galactic. Our multi-agent system consists of 2- robots that are each specialized for a certain task. 8 turtlebots will be simulated as threats, another 8 turtlebots will be specific to neutralizing these threats and 4 people will be simulated using Aruco markers. The remaining 4 turtlebots will be used to rescue these 4 Search.
 
 ## Final Project Team: Group 1
 
@@ -27,10 +25,10 @@ This project simulates a Multi-agent system for search and rescue missions where
 ### Build Instructions
 ```
 cd <your_ROS2_ws>/src
-git clone https://github.com/mahimaarora2208/multi_agent_hostage_rescue.git
+git clone https://github.com/mahimaarora2208/multi_agent_Search_rescue.git
 cd ..   
 rosdep install -i --from-path src --rosdistro galactic -y
-colcon build --packages-select multi_agent_hostage_rescue
+colcon build --packages-select multi_agent_Search_rescue
 source . install/setup.bash
 source ~/<your ROS2 installation>/opt/ros/galactic/setup.bash
 ```
@@ -80,11 +78,11 @@ sudo make install
 ### ROS2 Run TESTS
 Run the following commands to test your test cases:
 ```
-colcon build --packages-select multi_agent_hostage_rescue
+colcon build --packages-select multi_agent_Search_rescue
 source install/setup.bash
-colcon test --packages-select multi_agent_hostage_rescue
-colcon test --event-handlers console_direct+ --packages-select multi_agent_hostage_rescue 
-colcon test-result --test-result-base build/multi_agent_hostage_rescue
+colcon test --packages-select multi_agent_Search_rescue
+colcon test --event-handlers console_direct+ --packages-select multi_agent_Search_rescue 
+colcon test-result --test-result-base build/multi_agent_Search_rescue
 echo $?
 ```
 
