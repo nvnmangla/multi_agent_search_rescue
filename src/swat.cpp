@@ -41,6 +41,34 @@ move_base_msgs::MoveBaseGoal Swat::get_goal(std::pair<float,float>&goal_){
         
 }
 
+bool Swat::reach_goal(Robot&robot){
+
+    while (this->nh_.ok()){
+                     tf::StampedTransform transform;
+                     try{
+                       this->listner_.lookupTransform("map", robot.name+"_tf/odom",  
+                                                ros::Time(0), transform);
+
+                        auto x = transform.getOrigin().getX();
+                        auto y = transform.getOrigin().getY();
+
+                        auto dis = pow((x - robot.goal_.first),2) + pow((y - robot.goal_.second),2);
+                        if (sqrt(dis) < 5){
+                            robot.rescued = true;
+                        }
+
+
+                       
+                     }
+                     catch (tf::TransformException ex){
+                       ROS_ERROR("%s",ex.what());
+                       ros::Duration(1.0).sleep();
+                    }
+
+                }
+
+}
+
 Swat::Swat(ros::NodeHandle nh,std::vector<Robot*>robots){
 
             nh_ = nh;
@@ -53,19 +81,12 @@ Swat::Swat(ros::NodeHandle nh,std::vector<Robot*>robots){
                 this->moving = false;
                 this->move_to_goal(robot,clients[robot.name]);
 
-                while (nh.ok()){
-                     tf::StampedTransform transform;
-                     try{
-                       this->listner_.lookupTransform("map", robot.target_name+"_tf/odom",  
-                                                ros::Time(0), transform);
-                       
-                     }
-                     catch (tf::TransformException ex){
-                       ROS_ERROR("%s",ex.what());
-                       ros::Duration(1.0).sleep();
-                    }
-
+                if(robot.rescued == true){
+                    clients[robot.name]->cancelGoal();
+                    ROS_INFO_STREAM("Human at "<<robot.goal_.first<<" "<<robot.goal_.second << ": Thanks for saving me :) ");
                 }
+
+                
 
             }
 

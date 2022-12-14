@@ -25,6 +25,7 @@ class Swat{
         void move_to_goal(Robot &robot,std::unique_ptr<MoveBaseClient>&client);
         void wait(std::unique_ptr<MoveBaseClient>&client);
         // std::pair<float,float> make_pair(float a, float b);
+        bool reach_goal(Robot &robot);
 
     
     private:
@@ -33,6 +34,7 @@ class Swat{
         std::string robot_name;
         ros::NodeHandle nh_;
         tf::TransformListener listner_;
+
 
 };
 
