@@ -133,7 +133,7 @@
   <group ns="robot13">
       <param name="tf_prefix" value="robot13_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
-      <arg name="init_pose" value="-x 95 -y 4 -z 0 -Y 3.14" />
+      <arg name="init_pose" value="-x -15 -y -8 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot13" />
     </include>
   </group>
@@ -142,7 +142,7 @@
   <group ns="robot14">
       <param name="tf_prefix" value="robot14_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
-      <arg name="init_pose" value="-x 1 -y 8 -z 0 -Y 3.14" />
+      <arg name="init_pose" value="-x -14.1 -y 8 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot14" />
     </include>
   </group>
@@ -300,14 +300,14 @@
 
   <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot13"/>
-    <arg name="initial_pose_x" value="5" />
-    <arg name="initial_pose_y" value="4" />
+    <arg name="initial_pose_x" value="-15" />
+    <arg name="initial_pose_y" value="-8" />
     <arg name="initial_pose_a" value="3.14" />
   </include>
 
   <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot14"/>
-    <arg name="initial_pose_x" value="1" />
+    <arg name="initial_pose_x" value="-14.1" />
     <arg name="initial_pose_y" value="8" />
     <arg name="initial_pose_a" value="3.14" />
   </include>
@@ -350,7 +350,7 @@
   <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot20"/>
     <arg name="initial_pose_x" value="-7" />
-    <arg name="initial_pose_y" value="8" />
+    <arg name="initial_pose_y" value="-8" />
     <arg name="initial_pose_a" value="3.14" />
   </include>
 
