@@ -61,51 +61,51 @@
   </group>
 
   <!--Robot 6-->
-  <!-- <group ns="robot6">
+  <group ns="robot6">
     <param name="tf_prefix" value="robot6_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
        <arg name="init_pose" value="-x 7 -y -8 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot6" />
     </include>
-  </group> -->
+  </group>
 
 
 <!-- Robot 7-->
-  <!-- <group ns="robot7">
+  <group ns="robot7">
       <param name="tf_prefix" value="robot7_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
       <arg name="init_pose" value="-x 7 -y -7 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot7" />
     </include>
-  </group> -->
+  </group>
 
   <!--Robot 8-->
-  <!-- <group ns="robot8">
+  <group ns="robot8">
     <param name="tf_prefix" value="robot8_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
       <arg name="init_pose" value="-x 7 -y -6 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot8" />
     </include>
-  </group> -->
+  </group>
 
 
 <!-- Robot 9-->
-  <!-- <group ns="robot9">
+  <group ns="robot9">
       <param name="tf_prefix" value="robot9_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
       <arg name="init_pose" value="-x 8 -y -9 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot9" />
     </include>
-  </group> -->
+  </group>
 
   <!-- Robot 10-->
-  <!-- <group ns="robot10">
+  <group ns="robot10">
       <param name="tf_prefix" value="robot10_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
       <arg name="init_pose" value="-x 8 -y -8 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot10" />
     </include>
-  </group> -->
+  </group>
 
   <!-- Robot 11-->
   <group ns="robot11">
@@ -117,35 +117,35 @@
   </group>
 
   <!-- Robot 12-->
-  <!-- <group ns="robot12">
+  <group ns="robot12">
       <param name="tf_prefix" value="robot12_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
       <arg name="init_pose" value="-x 5 -y 1 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot12" />
     </include>
-  </group> -->
+  </group>
 
 
 
 
 
   <!-- Robot 13-->
-  <!-- <group ns="robot13">
+  <group ns="robot13">
       <param name="tf_prefix" value="robot13_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
       <arg name="init_pose" value="-x -15 -y -8 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot13" />
     </include>
-  </group> -->
+  </group>
 
   <!-- Robot 14-->
-  <!-- <group ns="robot14">
+  <group ns="robot14">
       <param name="tf_prefix" value="robot14_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
       <arg name="init_pose" value="-x -14.1 -y 8 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot14" />
     </include>
-  </group> -->
+  </group>
 
   <!-- Robot 15-->
   <group ns="robot15">
@@ -178,22 +178,22 @@
   </group>
 
   <!-- Robot 18-->
-  <!-- <group ns="robot18">
+  <group ns="robot18">
       <param name="tf_prefix" value="robot18_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
       <arg name="init_pose" value="-x -4 -y -2 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot18" />
     </include>
-  </group> -->
+  </group>
 
   <!-- Robot 19-->
-  <!-- <group ns="robot19">
+  <group ns="robot19">
       <param name="tf_prefix" value="robot19_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
       <arg name="init_pose" value="-x -5 -y -9 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot19" />
     </include>
-  </group> -->
+  </group>
 
   <!-- Robot 20-->
   <group ns="robot20">
@@ -249,7 +249,7 @@
     <arg name="initial_pose_a" value="3.14" />
   </include>
 
-  <!-- <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
+    <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot6"/>
     <arg name="initial_pose_x" value="7" />
     <arg name="initial_pose_y" value="-8" />
@@ -282,7 +282,7 @@
     <arg name="initial_pose_x" value="8" />
     <arg name="initial_pose_y" value="-8" />
     <arg name="initial_pose_a" value="3.14" />
-  </include> -->
+  </include>
 
   <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot11"/>
@@ -291,14 +291,14 @@
     <arg name="initial_pose_a" value="3.14" />
   </include>
 
-  <!-- <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
+  <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot12"/>
     <arg name="initial_pose_x" value="5" />
     <arg name="initial_pose_y" value="1" />
     <arg name="initial_pose_a" value="3.14" />
-  </include> -->
+  </include>
 
-  <!-- <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
+  <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot13"/>
     <arg name="initial_pose_x" value="-15" />
     <arg name="initial_pose_y" value="-8" />
@@ -310,7 +310,7 @@
     <arg name="initial_pose_x" value="-14.1" />
     <arg name="initial_pose_y" value="8" />
     <arg name="initial_pose_a" value="3.14" />
-  </include> -->
+  </include>
 
   <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot15"/>
@@ -333,19 +333,19 @@
     <arg name="initial_pose_a" value="3.14" />
   </include>
 
-  <!-- <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
+  <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot18"/>
     <arg name="initial_pose_x" value="-4" />
     <arg name="initial_pose_y" value="-2" />
     <arg name="initial_pose_a" value="3.14" />
-  </include> -->
+  </include>
 
-  <!-- <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
+  <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot19"/>
     <arg name="initial_pose_x" value="-5" />
     <arg name="initial_pose_y" value="-9" />
     <arg name="initial_pose_a" value="3.14" />
-  </include> -->
+  </include>
 
   <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot20"/>
@@ -376,7 +376,7 @@
   <arg name="robot_name" value="robot5"/>
   </include>
 
-  <!-- <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
+    <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
   <arg name="robot_name" value="robot6"/>
   </include>
 
@@ -394,23 +394,23 @@
 
   <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
   <arg name="robot_name" value="robot10"/>
-  </include> -->
+  </include>
 
   <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
   <arg name="robot_name" value="robot11"/>
   </include>
 
-  <!-- <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
+  <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
   <arg name="robot_name" value="robot12"/>
-  </include> -->
-<!-- 
+  </include>
+
   <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
   <arg name="robot_name" value="robot13"/>
-  </include> -->
-<!-- 
+  </include>
+
   <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
   <arg name="robot_name" value="robot14"/>
-  </include> -->
+  </include>
 
   <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
   <arg name="robot_name" value="robot15"/>
@@ -424,13 +424,13 @@
   <arg name="robot_name" value="robot17"/>
   </include>
 
-  <!-- <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
+  <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
   <arg name="robot_name" value="robot18"/>
   </include>
 
   <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
   <arg name="robot_name" value="robot19"/>
-  </include> -->
+  </include>
 
   <include file="$(find multi_agent_search_and_rescue)/launch/move_base.launch" >
   <arg name="robot_name" value="robot20"/>

@@ -61,6 +61,26 @@ jobs:
         run: |
           . /opt/ros/$ROS_DISTRO/setup.bash
             rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
+            sudo apt install ros-$ROS_DISTRO-turtlebot3 -y
+            sudo apt install ros-$ROS_DISTRO-turtlebot3-bringup -y
+            sudo apt install ros-$ROS_DISTRO-turtlebot3-description -y
+            sudo apt install ros-$ROS_DISTRO-turtlebot3-gazebo -y
+            sudo apt install ros-$ROS_DISTRO-turtlebot3-msgs -y
+            sudo apt install ros-$ROS_DISTRO-turtlebot3-navigation -y
+            sudo apt install ros-$ROS_DISTRO-turtlebot3-simulations -y
+            sudo apt install ros-$ROS_DISTRO-turtlebot3-slam -y
+            sudo apt install ros-$ROS_DISTRO-move-base -y
+            sudo apt install ros-$ROS_DISTRO-move-base-msgs -y
+            sudo apt install ros-$ROS_DISTRO-aruco-detect -y
+            sudo apt install ros-$ROS_DISTRO-tf -y
+            sudo apt install ros-$ROS_DISTRO-tf2-ros -y
+            sudo apt install ros-$ROS_DISTRO-actionlib -y
+            sudo apt install ros-$ROS_DISTRO-actionlib-msgs -y
+            sudo apt install ros-$ROS_DISTRO-amcl -y
+            sudo apt install ros-$ROS_DISTRO-map-server -y
+            sudo apt install ros-$ROS_DISTRO-navigation -y
+            sudo apt install ros-$ROS_DISTRO-fiducial-msgs -y
+
             source /opt/ros/noetic/setup.bash
             catkin build
 
