@@ -22,5 +22,10 @@ int main(int argc ,char** argv){
     ros::init(argc, argv, "finder");
     ros::NodeHandle nh;
     Swat chopchop(nh,swat);
+    while(ros::ok){
+        chopchop.move(swat);
+    }
+
+
     return 0;
 }

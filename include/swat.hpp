@@ -23,17 +23,22 @@ class Swat{
         void set_client(Robot &robot,std::unique_ptr<MoveBaseClient>&client);
         // std::unique_ptr<MoveBaseClient> get_client();
         void move_to_goal(Robot &robot,std::unique_ptr<MoveBaseClient>&client);
+
         void wait(std::unique_ptr<MoveBaseClient>&client);
         // std::pair<float,float> make_pair(float a, float b);
         bool reach_goal(Robot &robot);
 
+        void move(std::vector<Robot*>robots);
     
     private:
         std::map<std::string,std::unique_ptr<MoveBaseClient>>clients;
         // std::unique_ptr<MoveBaseClient>client1;
         std::string robot_name;
         ros::NodeHandle nh_;
+        tf::StampedTransform transform;
+
         tf::TransformListener listner_;
+        
 
 
 };

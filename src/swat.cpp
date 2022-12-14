@@ -5,7 +5,7 @@ std::pair<float,float> make_pair(float a,float b){
 
 void Swat::move_to_goal(Robot &robot,std::unique_ptr<MoveBaseClient>&client){
     
-    ROS_INFO_STREAM("Moving to goal" + this->robot_name);
+    // ROS_INFO_STREAM("Moving to goal" + this->robot_name);
 
     
     client->sendGoal(this->get_goal(robot.goal_));
@@ -41,55 +41,59 @@ move_base_msgs::MoveBaseGoal Swat::get_goal(std::pair<float,float>&goal_){
         
 }
 
-bool Swat::reach_goal(Robot&robot){
-
-    while (this->nh_.ok()){
-                     tf::StampedTransform transform;
-                     try{
-                       this->listner_.lookupTransform("map", robot.name+"_tf/odom",  
-                                                ros::Time(0), transform);
-
-                        auto x = transform.getOrigin().getX();
-                        auto y = transform.getOrigin().getY();
-
-                        auto dis = pow((x - robot.goal_.first),2) + pow((y - robot.goal_.second),2);
-                        if (sqrt(dis) < 5){
-                            robot.rescued = true;
-                        }
+bool Swat::reach_goal(Robot &robot){
 
 
-                       
-                     }
-                     catch (tf::TransformException ex){
-                       ROS_ERROR("%s",ex.what());
-                       ros::Duration(1.0).sleep();
-                    }
+        try{
+        this->listner_.lookupTransform("map", robot.name+"_tf/odom",  
+                                ros::Time(0), transform);
 
-                }
+        auto x = transform.getOrigin().getX();
+        auto y = transform.getOrigin().getY();
 
+        auto dis = pow((x - robot.goal_.first),2) + pow((y - robot.goal_.second),2);
+        // ROS_INFO_STREAM("Distance from Goal"<<dis);
+        if (sqrt(dis) < 5){
+            robot.rescued = true;
+            return true;
+        }
+        else return false;
+        
+        }
+        catch (tf::TransformException ex){
+        ROS_ERROR("%s",ex.what());
+        ros::Duration(1.0).sleep();
+        return false;
+        }
+    
+
+}
+
+void Swat::move(std::vector<Robot*>robots){
+        for(int i=0;i<robots.size();i++){
+            auto robot = *robots[i];
+            move_to_goal(robot,clients[robot.name]);
+            if (reach_goal(robot)){
+                clients[robot.name]->cancelGoal();
+                ROS_INFO_STREAM("Person: Thanks " + robot.name + " for saving me");
+            }
+
+    }
 }
 
 Swat::Swat(ros::NodeHandle nh,std::vector<Robot*>robots){
 
             nh_ = nh;
             // robot_name = robot.name;
+            
             for(int i=0;i<robots.size();i++){
-                auto robot = *robots[i];
-                // auto client = clients[robot.name];
-                ROS_INFO_STREAM("Robot Initialized with name "+robot.name);
-                this->set_client(robot,clients[robot.name]);
-                this->moving = false;
-                this->move_to_goal(robot,clients[robot.name]);
-
-                if(robot.rescued == true){
-                    clients[robot.name]->cancelGoal();
-                    ROS_INFO_STREAM("Human at "<<robot.goal_.first<<" "<<robot.goal_.second << ": Thanks for saving me :) ");
-                }
-
+                    auto robot = *robots[i];
                 
-
+                    ROS_INFO_STREAM("Robot Initialized with name "+robot.name);
+                    this->set_client(robot,clients[robot.name]);
+                    this->moving = false;
             }
-
+                
         }
 
 Swat::~Swat(){};
