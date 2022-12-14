@@ -133,8 +133,8 @@ include_directories(
 add_executable(finder src/move_goal.cpp )
 target_link_libraries(finder ${catkin_LIBRARIES})
 
-# add_executable(threats src/threats.cpp )
-# target_link_libraries(threats ${catkin_LIBRARIES})
+add_executable(threats src/threats.cpp )
+target_link_libraries(threats ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
