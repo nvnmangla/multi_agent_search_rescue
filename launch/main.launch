@@ -160,7 +160,7 @@
   <group ns="robot16">
       <param name="tf_prefix" value="robot16_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
-      <arg name="init_pose" value="-x -7 -y 1 -z 0 -Y 3.14" />
+      <arg name="init_pose" value="-x -6 -y 1 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot16" />
     </include>
   </group>
@@ -172,7 +172,7 @@
   <group ns="robot17">
       <param name="tf_prefix" value="robot17_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
-      <arg name="init_pose" value="-x -3 -y 9 -z 0 -Y 3.14" />
+      <arg name="init_pose" value="-x -2 -y 9 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot17" />
     </include>
   </group>
@@ -199,7 +199,7 @@
   <group ns="robot20">
       <param name="tf_prefix" value="robot20_tf" />
     <include file="$(find multi_agent_search_and_rescue)/launch/individual_robot.launch" >
-      <arg name="init_pose" value="-x -7 -y -8 -z 0 -Y 3.14" />
+      <arg name="init_pose" value="-x -4 -y -9 -z 0 -Y 3.14" />
       <arg name="robot_name"  value="robot20" />
     </include>
   </group>
@@ -321,14 +321,14 @@
 
   <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot16"/>
-    <arg name="initial_pose_x" value="-7" />
+    <arg name="initial_pose_x" value="-6" />
     <arg name="initial_pose_y" value="1" />
     <arg name="initial_pose_a" value="3.14" />
   </include>
 
   <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot17"/>
-    <arg name="initial_pose_x" value="-3" />
+    <arg name="initial_pose_x" value="-2" />
     <arg name="initial_pose_y" value="9" />
     <arg name="initial_pose_a" value="3.14" />
   </include>
@@ -349,8 +349,8 @@
 
   <include file="$(find multi_agent_search_and_rescue)/launch/amcl.launch" >
     <arg name="robot_name" value="robot20"/>
-    <arg name="initial_pose_x" value="-7" />
-    <arg name="initial_pose_y" value="-8" />
+    <arg name="initial_pose_x" value="-4" />
+    <arg name="initial_pose_y" value="-9" />
     <arg name="initial_pose_a" value="3.14" />
   </include>
 

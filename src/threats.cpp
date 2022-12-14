@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 int main(int argc, char**argv){
-size_t temp = 50; 
+size_t temp = 20; 
 size_t cycle = 0;
-
+double speed = 0.3;
 ros::init(argc, argv, "publish_velocity");
 ros::NodeHandle nh;
 
@@ -21,7 +21,7 @@ ros::Rate rate(2);
 while(ros::ok()){
     geometry_msgs::Twist msg;
 
-    if(cycle == 3){
+    if(cycle == 15){
         msg.linear.x = 0;
         pub11.publish(msg);
         pub15.publish(msg);
@@ -32,29 +32,29 @@ while(ros::ok()){
         exit(EXIT_SUCCESS);
     }
     else{
-        if (count < temp) // 500
+        if (count < temp) // 20
         {
             msg.linear.x = 0;
         }
-        else if (count < 1.5*temp) // 750
+        else if (count < 1.5*temp) // 30
         {
-            msg.linear.x = 0.1;
+            msg.linear.x = speed;
         }
 
-        else if (count < 1.55*temp) // 775
+        else if (count < 1.55*temp) // 31
         {
             msg.linear.x = 0.0;
        
         }
         
-        else if (count< 2.05*temp) // 1025
+        else if (count< 2.05*temp) // 41
         {
-            msg.linear.x = -0.1;     
+            msg.linear.x = -speed;     
         }
 
-        else if (count < 2.1*temp) // 1050
+        else if (count < 2.1*temp) // 42
         {
-            count = 450;
+            count = 10;
             cycle++;
         }
         
