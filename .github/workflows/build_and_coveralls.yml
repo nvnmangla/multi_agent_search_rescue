@@ -60,7 +60,7 @@ jobs:
         if: contains(matrix.container.image, 'noetic') || contains(matrix.container.image, 'noetic')
         run: |
           . /opt/ros/$ROS_DISTRO/setup.bash
-            sudo apt-get install ros-noetic-ros-tutorials -y
+            rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
             source /opt/ros/noetic/setup.bash
             catkin build
 
