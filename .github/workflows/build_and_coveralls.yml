@@ -46,7 +46,7 @@ jobs:
       
       - name: Install catkin-tools
         run: |
-          sudo apt install python3-catkin-tools python3-osrf-pycommon
+          sudo apt install python3-catkin-tools python3-osrf-pycommon -y
 
       - name: Create workspace
         run: |
