@@ -3,9 +3,9 @@
 #include <stdlib.h>
 
 int main(int argc, char**argv){
-size_t temp = 20; 
+size_t temp = 50; 
 size_t cycle = 0;
-double speed = 0.3;
+double speed = 0.2;
 ros::init(argc, argv, "publish_velocity");
 ros::NodeHandle nh;
 
@@ -32,29 +32,28 @@ while(ros::ok()){
         exit(EXIT_SUCCESS);
     }
     else{
-        if (count < temp) // 20
+        if (count < temp) // 50
         {
             msg.linear.x = 0;
         }
-        else if (count < 1.5*temp) // 30
+        else if (count < 1.5*temp) // 75
         {
             msg.linear.x = speed;
         }
 
-        else if (count < 1.55*temp) // 31
+        else if (count < 1.65*temp) // 85
         {
             msg.linear.x = 0.0;
-       
         }
         
-        else if (count< 2.05*temp) // 41
+        else if (count < 2.15*temp) // 105
         {
             msg.linear.x = -speed;     
         }
 
-        else if (count < 2.1*temp) // 42
+        else if (count < 2.25*temp) // 125
         {
-            count = 10;
+            count = 35;
             cycle++;
         }
         
