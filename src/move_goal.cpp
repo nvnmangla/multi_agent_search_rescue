@@ -7,7 +7,7 @@ typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseCl
 int main(int argc, char** argv){
 
     ros::init(argc, argv, "simple_navigation_goals");
-    MoveBaseClient ac("robot1/move_base", true);
+    MoveBaseClient ac("robot6/move_base", true);
 
     while(!ac.waitForServer(ros::Duration(5.0))){
        ROS_INFO("Waiting for the move_base action server to come up");
