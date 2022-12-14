@@ -121,7 +121,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+include
   ${catkin_INCLUDE_DIRS}
 )
 include_directories(
@@ -130,7 +130,7 @@ include_directories(
   # ${OpenCV_INCLUDE_DIRS}
 )
 
-add_executable(finder src/move_goal.cpp )
+add_executable(finder src/main.cpp src/swat.cpp )
 target_link_libraries(finder ${catkin_LIBRARIES})
 
 # add_executable(threats src/threats.cpp )
@@ -197,7 +197,7 @@ target_link_libraries(finder ${catkin_LIBRARIES})
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
 #   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-#   FILES_MATCHING PATTERN "*.h"
+#   FILES_MATCHING PATTERN "*.hpp"
 #   PATTERN ".svn" EXCLUDE
 # )
 
