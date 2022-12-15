@@ -47,7 +47,6 @@
 #include <gtest/gtest.h>
 
 #include <memory>
-
 #include <utility>
 
 // #include <rclcpp/rclcpp.h>

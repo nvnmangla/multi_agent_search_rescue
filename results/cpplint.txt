@@ -4,3 +4,5 @@ Done processing ./include/threats.hpp
 Done processing ./src/main.cpp
 Done processing ./src/swat.cpp
 Done processing ./src/threats.cpp
+Done processing ./test/main.cpp
+Done processing ./test/test.cpp
