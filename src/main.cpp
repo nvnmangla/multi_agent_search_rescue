@@ -1,4 +1,5 @@
 #include<swat.hpp>
+#include <threats.hpp>
 
 int main(int argc ,char** argv){
     auto goal_1= make_pair(9,9);
@@ -12,20 +13,29 @@ int main(int argc ,char** argv){
     Robot robot3("robot3","robot11",goal_3);
     Robot robot4("robot4","robot16",goal_4);
     Robot robot5("robot5","robot20",goal_5);
+    Robot robot6("robot20");
+
 
     std::vector<Robot*>swat = {
-        &robot1, &robot2, &robot3, &robot4, &robot5
+        &robot1, //&robot2, &robot3, &robot4, &robot5
     };
 
+    std::vector<Robot*>threats = {
+        &robot6, //&robot2, &robot3, &robot4, &robot5
+    };
 
-
-    ros::init(argc, argv, "finder");
+    ros::init(argc, argv, "chopchop");
     ros::NodeHandle nh;
-    Swat chopchop(nh,swat);
-    while(ros::ok){
-        chopchop.move(swat);
-    }
 
+    Threats killers(nh,threats);
+    Swat savers(nh,swat);
+
+    while(ros::ok){
+        savers.move(swat);
+        killers.move(threats);
+        
+    }
+    ros::shutdown();
 
     return 0;
 }

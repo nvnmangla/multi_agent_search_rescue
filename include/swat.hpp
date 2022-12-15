@@ -11,35 +11,28 @@
 
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
 
-
-
 class Swat{
     public:
         explicit Swat(ros::NodeHandle nh,std::vector<Robot*>robots);
         ~Swat();
         bool moving;
-
         move_base_msgs::MoveBaseGoal get_goal(std::pair<float,float>&goal_);
         void set_client(Robot &robot,std::unique_ptr<MoveBaseClient>&client);
-        // std::unique_ptr<MoveBaseClient> get_client();
-        void move_to_goal(Robot &robot,std::unique_ptr<MoveBaseClient>&client);
-
+        void move_to_goal(Robot &robot);
         void wait(std::unique_ptr<MoveBaseClient>&client);
-        // std::pair<float,float> make_pair(float a, float b);
-        bool reach_goal(Robot &robot);
-
+        bool detect_enemy(Robot &robot);
         void move(std::vector<Robot*>robots);
+        void kill_enemy(Robot &robot);
     
     private:
         std::map<std::string,std::unique_ptr<MoveBaseClient>>clients;
-        // std::unique_ptr<MoveBaseClient>client1;
+
         std::string robot_name;
         ros::NodeHandle nh_;
         tf::StampedTransform transform;
-
         tf::TransformListener listner_;
+        ros::Publisher terminator_;
         
-
 
 };
 

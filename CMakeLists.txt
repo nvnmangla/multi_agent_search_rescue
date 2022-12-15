@@ -130,11 +130,11 @@ include_directories(
   # ${OpenCV_INCLUDE_DIRS}
 )
 
-add_executable(finder src/main.cpp src/swat.cpp )
+add_executable(finder src/main.cpp src/swat.cpp src/threats.cpp)
 target_link_libraries(finder ${catkin_LIBRARIES})
 
-add_executable(threats src/threats.cpp )
-target_link_libraries(threats ${catkin_LIBRARIES})
+# add_executable(threats src/main.cpp src/swat.cpp src/threats.cpp )
+# target_link_libraries(threats ${catkin_LIBRARIES})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}

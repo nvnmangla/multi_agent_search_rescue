@@ -3,14 +3,16 @@ std::pair<float,float> make_pair(float a,float b){
         return std::pair<float,float>(a,b);
 }
 
-void Swat::move_to_goal(Robot &robot,std::unique_ptr<MoveBaseClient>&client){
-    
-    // ROS_INFO_STREAM("Moving to goal" + this->robot_name);
+void Swat::move_to_goal(Robot &robot){
 
-    
-    client->sendGoal(this->get_goal(robot.goal_));
-    this->moving = true;
+    if (!(clients[robot.name]->getState() == actionlib::SimpleClientGoalState::SUCCEEDED)){
+        clients[robot.name]->sendGoal(this->get_goal(robot.goal_));
+        this->moving = true;
+    }
+    else{
 
+        clients[robot.name]->cancelGoal();
+    }
 }
 
 
@@ -41,24 +43,17 @@ move_base_msgs::MoveBaseGoal Swat::get_goal(std::pair<float,float>&goal_){
         
 }
 
-bool Swat::reach_goal(Robot &robot){
-
-
+bool Swat::detect_enemy(Robot &robot){
         try{
-        this->listner_.lookupTransform("map", robot.name+"_tf/odom",  
+        this->listner_.lookupTransform(robot.name+"_tf/base_footprint",robot.target_name+"_tf/base_footprint",  
                                 ros::Time(0), transform);
-
         auto x = transform.getOrigin().getX();
         auto y = transform.getOrigin().getY();
-
-        auto dis = pow((x - robot.goal_.first),2) + pow((y - robot.goal_.second),2);
-        // ROS_INFO_STREAM("Distance from Goal"<<dis);
-        if (sqrt(dis) < 5){
-            robot.rescued = true;
-            return true;
+        auto dis = pow((x),2) + pow((y),2);
+        if (sqrt(dis) < 2){
+            ROS_WARN("Enemy Inside !!");
         }
         else return false;
-        
         }
         catch (tf::TransformException ex){
         ROS_ERROR("%s",ex.what());
@@ -69,31 +64,41 @@ bool Swat::reach_goal(Robot &robot){
 
 }
 
+
+void Swat::kill_enemy(Robot &robot){
+
+    if(detect_enemy(robot)){
+        terminator_ = nh_.advertise<geometry_msgs::Twist>(robot.target_name + "/cmd_vel",10);
+        geometry_msgs::Twist msg;
+        msg.linear.x = 0;
+        msg.linear.y = 0;
+        msg.linear.z = 0;
+        msg.angular.x = 0;
+        msg.angular.y = 0;
+        msg.angular.z = 0;
+
+        ROS_WARN("Shooting enemy ");    
+        terminator_.publish(msg);
+
+    }
+
+}
+
 void Swat::move(std::vector<Robot*>robots){
         for(int i=0;i<robots.size();i++){
-            auto robot = *robots[i];
-            move_to_goal(robot,clients[robot.name]);
-            if (reach_goal(robot)){
-                clients[robot.name]->cancelGoal();
-                ROS_INFO_STREAM("Person: Thanks " + robot.name + " for saving me");
-            }
-
+            move_to_goal(*robots[i]);
+            kill_enemy(*robots[i]);
     }
 }
 
 Swat::Swat(ros::NodeHandle nh,std::vector<Robot*>robots){
-
             nh_ = nh;
-            // robot_name = robot.name;
-            
             for(int i=0;i<robots.size();i++){
                     auto robot = *robots[i];
-                
                     ROS_INFO_STREAM("Robot Initialized with name "+robot.name);
                     this->set_client(robot,clients[robot.name]);
                     this->moving = false;
             }
-                
         }
 
 Swat::~Swat(){};

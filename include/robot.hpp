@@ -19,6 +19,11 @@ class Robot{
             rescued = false;
             terminated = false;
         }
+
+        explicit Robot(const std::string robot_name){
+            name = robot_name;
+            terminated = false;
+        }
         
         std::string name;
         std::string target_name;

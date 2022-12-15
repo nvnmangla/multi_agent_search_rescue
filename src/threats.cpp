@@ -1,33 +1,30 @@
-#include <ros/ros.h>
-#include <geometry_msgs/Twist.h>
-#include <stdlib.h>
 
-int main(int argc, char**argv){
-size_t temp = 50; 
-size_t cycle = 0;
-double speed = 0.2;
-ros::init(argc, argv, "publish_velocity");
-ros::NodeHandle nh;
+#include<threats.hpp>
 
-ros::Publisher pub11 = nh.advertise<geometry_msgs::Twist>("/robot11/cmd_vel", 1000);
-ros::Publisher pub15 = nh.advertise<geometry_msgs::Twist>("/robot15/cmd_vel", 1000);
-ros::Publisher pub16 = nh.advertise<geometry_msgs::Twist>("/robot16/cmd_vel", 1000);
-ros::Publisher pub17 = nh.advertise<geometry_msgs::Twist>("/robot17/cmd_vel", 1000);
-ros::Publisher pub20 = nh.advertise<geometry_msgs::Twist>("/robot20/cmd_vel", 1000);
-int count = 0;
-srand(time(0));
+Threats::Threats(ros::NodeHandle &nh,std::vector<Robot*>&robots){
+    nh_ = nh;
+    for(int i=0;i<robots.size();i++){
+        this->publishers[robots[i]->name] = nh_.advertise<geometry_msgs::Twist>(+"/cmd_vel", 10);
+        robots[i]->terminated = false;    
+        }
+    ROS_INFO_STREAM("Threats Initiated");
+}
 
-ros::Rate rate(2);
-while(ros::ok()){
+void Threats::move(std::vector<Robot*>robots){
     geometry_msgs::Twist msg;
+    size_t temp = 50; 
+    size_t cycle = 0;
+    double speed = 0.2;
+    int count = 0;
 
     if(cycle == 15){
         msg.linear.x = 0;
-        pub11.publish(msg);
-        pub15.publish(msg);
-        pub16.publish(msg);
-        pub17.publish(msg);
-        pub20.publish(msg);
+        for(int i=0;i<robots.size();i++){
+            if (!robots[i]->terminated){
+                this->publishers[robots[i]->name].publish(msg);
+                ROS_INFO_STREAM("Publishing on "+robots[i]->name);
+            }
+        }
         
         exit(EXIT_SUCCESS);
     }
@@ -56,18 +53,16 @@ while(ros::ok()){
             count = 35;
             cycle++;
         }
-        
-        pub11.publish(msg);
-        pub15.publish(msg);
-        pub16.publish(msg);
-        pub17.publish(msg);
-        pub20.publish(msg);
-        ROS_INFO_STREAM("Sending velocity command to threats:"<<" linear="<<msg.linear.x<<" angular="<<msg.angular.z);       
-        ROS_INFO_STREAM("COUNT: "<<count<<"  CYCLE: "<<cycle);
     
-        rate.sleep();
-        count++;
-    
+    for(int i=0;i<robots.size();i++){
+            if (!robots[i]->terminated){
+            this->publishers[robots[i]->name].publish(msg);
+            }
+        }
+        count++; 
+        }  
     }      
-}   
-} 
+
+Threats::~Threats(){
+
+}
